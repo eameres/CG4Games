@@ -11,4 +11,4 @@ using IMGUI the program also allows for "hot swapping" the basic vertex and frag
 
 building requires VS 2019 (likely works with earlier versions as well) and CMAKE
 
-Find the build directory and run the setup batch file.  In the file that it creates you will find a VS2019 sln file you can launch
+Find the build directory and run the setup batch file.  Inside the new folder it creates you will find a VS2019 sln file to launch
