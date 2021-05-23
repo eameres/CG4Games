@@ -103,7 +103,7 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-        ourShader.use();
+        //ourShader.use();
 
         glBegin(GL_TRIANGLES);
             glVertex3f(-0.6f, -0.4f, 0.f);
