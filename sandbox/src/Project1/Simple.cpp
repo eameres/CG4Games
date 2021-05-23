@@ -54,10 +54,11 @@ int main()
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
+
     const char* glsl_version = "#version 130";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+   // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+   // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+   // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // glfw window creation
     // --------------------
@@ -71,6 +72,7 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -78,14 +80,16 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+    
     // build and compile our shader program
     // ------------------------------------
     ourShader.reload(vtext, ftext);
 
+    /*
     indexCount = 3;
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
-
+    */
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -97,19 +101,21 @@ int main()
         // render
         // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-        // glfw: poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwPollEvents();  
-
-        // these following lines are really where our geometry gets rendered!
         ourShader.use();
-        glBindVertexArray(VAO);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBegin(GL_TRIANGLES);
+            glVertex3f(-0.6f, -0.4f, 0.f);
+            glVertex3f(0.6f, -0.4f, 0.f);
+            glVertex3f(0.f, 0.6f, 0.f);
+        glEnd();
+        
+        //glBindVertexArray(VAO);
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
 
         glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
